@@ -1,0 +1,23 @@
+NutriScreen-ES Extracted Decision Tree Rules
+================================================
+Note: categorical features are encoded numerically. See mappings below.
+
+Encoded label mapping:
+
+Target label:
+- 0: Not Stunted
+- 1: Stunted
+
+Categorical feature labels:
+gender:
+- 0: f
+- 1: m
+
+Decision Tree rules:
+|--- height_for_age_zscore <= -2.00
+|   |--- class: 1
+|--- height_for_age_zscore >  -2.00
+|   |--- height_for_age_zscore <= 4.36
+|   |   |--- class: 0
+|   |--- height_for_age_zscore >  4.36
+|   |   |--- class: 0

@@ -1,0 +1,46 @@
+NutriScreen-ES ML Training Evaluation Report
+================================================
+Dataset file: C:\Users\Purna Siswantomo\Documents\Semester 6\Sistem Pakar\Project ESDLC\ml_pipeline\data\Overall Data.xlsx
+Rows used: 40071
+Target column: height_for_age
+Feature columns: gender, age_months, weight_kg, height_cm, weight_for_age_zscore, height_for_age_zscore, weight_for_height_zscore
+
+Model: DecisionTreeClassifier
+Accuracy : 0.9999
+Precision: 0.9999
+Recall   : 0.9999
+F1-score : 0.9999
+
+Classification report:
+              precision    recall  f1-score   support
+
+ Not Stunted       1.00      1.00      1.00      4774
+     Stunted       1.00      1.00      1.00      3241
+
+    accuracy                           1.00      8015
+   macro avg       1.00      1.00      1.00      8015
+weighted avg       1.00      1.00      1.00      8015
+
+Confusion matrix:
+[[4774    0]
+ [   1 3240]]
+
+Model: RandomForestClassifier
+Accuracy : 0.9999
+Precision: 0.9999
+Recall   : 0.9999
+F1-score : 0.9999
+
+Classification report:
+              precision    recall  f1-score   support
+
+ Not Stunted       1.00      1.00      1.00      4774
+     Stunted       1.00      1.00      1.00      3241
+
+    accuracy                           1.00      8015
+   macro avg       1.00      1.00      1.00      8015
+weighted avg       1.00      1.00      1.00      8015
+
+Confusion matrix:
+[[4774    0]
+ [   1 3240]]

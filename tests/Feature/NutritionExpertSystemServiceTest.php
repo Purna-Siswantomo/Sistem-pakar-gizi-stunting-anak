@@ -43,6 +43,44 @@ class NutritionExpertSystemServiceTest extends TestCase
         $this->assertContains('R23', $result['triggered_rules']);
     }
 
+    public function test_ml_stunting_rule_uses_height_for_age_z_score_threshold(): void
+    {
+        $screening = $this->createScreening([
+            'height_for_age_z_score' => -2.00,
+        ]);
+
+        $result = app(NutritionExpertSystemService::class)->evaluate($screening);
+
+        $this->assertSame('high', $result['risk_category']);
+        $this->assertSame(4, $result['total_score']);
+        $this->assertContains('R5', $result['triggered_rules']);
+    }
+
+    public function test_severe_stunting_threshold_returns_urgent(): void
+    {
+        $screening = $this->createScreening([
+            'height_for_age_z_score' => -3.00,
+        ]);
+
+        $result = app(NutritionExpertSystemService::class)->evaluate($screening);
+
+        $this->assertSame('urgent', $result['risk_category']);
+        $this->assertContains('R6', $result['triggered_rules']);
+    }
+
+    public function test_normal_height_for_age_z_score_does_not_trigger_stunting_rule(): void
+    {
+        $screening = $this->createScreening([
+            'height_for_age_z_score' => -1.99,
+        ]);
+
+        $result = app(NutritionExpertSystemService::class)->evaluate($screening);
+
+        $this->assertSame('low', $result['risk_category']);
+        $this->assertNotContains('R5', $result['triggered_rules']);
+        $this->assertNotContains('R6', $result['triggered_rules']);
+    }
+
     private function createScreening(array $attributes = [])
     {
         $child = Child::create([

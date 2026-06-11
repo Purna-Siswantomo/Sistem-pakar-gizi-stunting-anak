@@ -33,6 +33,24 @@ class NutritionExpertSystemService
             $recommendations[] = 'Segera rujuk anak ke fasilitas kesehatan untuk pemeriksaan dan tata laksana oleh tenaga kesehatan.';
         }
 
+        if (! is_null($screening->height_for_age_z_score)) {
+            $heightForAgeZScore = (float) $screening->height_for_age_z_score;
+
+            if ($heightForAgeZScore <= -3.00) {
+                $urgent = true;
+                $triggeredRules[] = 'R6';
+                $explanations[] = 'Sistem menandai risiko stunting berat karena nilai HAZ manual kurang dari atau sama dengan -3.00 SD.';
+                $recommendations[] = 'Sarankan evaluasi segera oleh tenaga kesehatan dan pemantauan pertumbuhan intensif.';
+            } elseif ($heightForAgeZScore <= -2.00) {
+                $addRule(
+                    'R5',
+                    'Sistem menandai risiko stunting berdasarkan rule Decision Tree hasil training: HAZ kurang dari atau sama dengan -2.00 SD.',
+                    'Berikan edukasi gizi, pantau pertumbuhan, dan sarankan konsultasi ke tenaga kesehatan untuk penilaian lebih lanjut.',
+                    4,
+                );
+            }
+        }
+
         // Placeholder z-score manual sampai perhitungan WHO z-score otomatis ditambahkan.
         if (! is_null($screening->weight_for_height_z_score) && (float) $screening->weight_for_height_z_score < -3) {
             $urgent = true;

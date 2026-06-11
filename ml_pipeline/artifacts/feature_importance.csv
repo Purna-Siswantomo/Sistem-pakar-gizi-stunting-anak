@@ -1,0 +1,8 @@
+feature,decision_tree_importance,random_forest_importance
+height_for_age_zscore,1.0,0.7580766652199163
+weight_for_age_zscore,0.0,0.12429999486775656
+height_cm,0.0,0.04350699379970228
+weight_for_height_zscore,0.0,0.038820951509022164
+weight_kg,0.0,0.023701658888360337
+age_months,0.0,0.011342213272263226
+gender,0.0,0.00025152244297903606
